@@ -1,0 +1,144 @@
+.card {
+  background-color: white;
+  /* min-width: 400px; */
+  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 5px;
+  margin: 25px;
+  min-width: 400px;
+}
+.cardForm {
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 25px;
+  /* max-width: 600px; */
+}
+
+input,
+label,
+select,
+textarea {
+  margin: 8px 0 8px 4px;
+}
+
+.contentContainer {
+  background-color: #a5c9ff;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 5px;
+  box-shadow: -3px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+h1,
+h2 {
+  text-align: center;
+}
+
+hr {
+  width: 90%;
+  border: solid #a3c5f8 1px;
+  background-color: #a3c5f8;
+}
+
+.submitButton {
+  padding: 2px 8px 2px 8px;
+  color: white;
+  border-radius: 5px;
+  border-width: 1px;
+  background-color: dodgerblue;
+  transition-duration: 0.4s;
+}
+
+.removeButton {
+  padding: 2px 8px 2px 8px;
+  color: white;
+  border-radius: 5px;
+  border-width: 1px;
+  background-color: rgb(247, 107, 107);
+  transition-duration: 0.4s;
+}
+.saveButton {
+  padding: 2px 8px 2px 8px;
+  color: white;
+  border-radius: 5px;
+  border-width: 1px;
+  background-color: rgb(11, 190, 86);
+  transition-duration: 0.4s;
+}
+.submitButton:focus {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: rgb(24, 78, 226);
+}
+.submitButton:hover {
+  background-color: rgb(24, 78, 226);
+}
+
+.removeButton:focus {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: rgb(243, 55, 55);
+}
+.removeButton:hover {
+  background-color: rgb(243, 55, 55);
+}
+.saveButton:focus {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: rgb(30, 253, 86);
+}
+.saveButton:hover {
+  background-color: rgb(30, 253, 86);
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+textarea {
+  max-width: 8em;
+}
+
+input,
+textarea,
+select,
+button {
+  font-size: larger;
+}
+
+table {
+  width: 600px;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+thead th {
+  background-color: rgb(161, 203, 204);
+}
+tr:nth-child(odd) {
+  background-color: #fffefe;
+}
+tr:nth-child(even) {
+  background-color: rgb(189, 223, 189);
+}
+
+input:required:invalid,
+input:focus:invalid {
+  border-width: 1px;
+  border-color: red;
+  background-color: rgba(255, 0, 0, 0.062);
+}
+input:required:valid {
+  border-color: 1px;
+  border-color: green;
+  background-color: rgba(40, 247, 40, 0.1);
+}
