@@ -1,4 +1,5 @@
 module.exports = {
-  Product: require("./product"),
+  ClimateIssue: require("./climateIssue"),
+  Comment: require("./comment"),
   User: require("./user"),
 };

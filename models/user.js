@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const SALT_ROUNDS = 10;
 
 const userSchema = new Schema({
-  name: { type: String, required: true },
+  username: { type: String, required: true },
   password: {
     type: String,
     trim: true,
@@ -15,15 +15,15 @@ const userSchema = new Schema({
       message: "Password should be at least 6 characters.",
     },
   },
-  cart: [
+  postedClimateIssues: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Product",
+      ref: "ClimateIssue",
     },
   ],
-  admin: {
-    type: Boolean,
-  },
+  // TODO
+  // if climate issue to vote on is on this list you have already voted on it
+  votedClimateIssues: [{ type: Schema.Types.ObjectId, ref: "ClimateIssue" }],
 });
 
 // Hash password
