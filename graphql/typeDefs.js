@@ -7,13 +7,15 @@ module.exports = gql`
     body: String
     voteCount: Int
     createdAt: String
+    comment: ClimateIssue!
   }
   type ClimateIssue {
     id: ID!
-    author: String
+    author: String!
     title: String
     body: String
-    climateIssue: ClimateIssue
+    comments: [Comment!]!
+    voteCount: Int!
     createdAt: String
   }
   type User {
@@ -31,10 +33,15 @@ module.exports = gql`
   }
 
   type Query {
+    # TODO get climateIssues by User ID
+    # TODO add dummy data to test climateIssues carry comments list
     getClimateIssues: [ClimateIssue!]
   }
 
   type Mutation {
+    # TODO add climateIssue inputs are (title, body)
+    # TODO add post for voter count plus one
+    # TODO add post for comment inputs are (climateID,body)
     register(registerInput: RegisterInput): User!
     login(username: String!, password: String!): User!
   }
