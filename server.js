@@ -1,10 +1,10 @@
-const { ApolloServer, gql } = require("apollo-server-express");
+const { ApolloServer } = require("apollo-server-express");
 const { ApolloServerPluginDrainHttpServer } = require("apollo-server-core");
 const express = require("express");
 const http = require("http");
 const mongoose = require("mongoose");
-const db = require("./models");
-
+const typeDefs = require("./graphql/typeDefs");
+const resolvers = require("./graphql/resolvers");
 const PORT = process.env.PORT || 8080;
 
 async function startApolloServer() {
@@ -18,33 +18,6 @@ async function startApolloServer() {
   }
   const httpServer = http.createServer(app);
 
-  const typeDefs = gql`
-    type ClimateIssue {
-      id: ID!
-      author: String
-      title: String
-      body: String
-      comments: [String]
-      voteCount: Int
-    }
-
-    type Query {
-      getClimateIssues: [ClimateIssue!]
-    }
-  `;
-
-  const resolvers = {
-    Query: {
-      async getClimateIssues() {
-        try {
-          const climateIssues = await db.ClimateIssue.find();
-          return climateIssues;
-        } catch (err) {
-          throw new Error(err);
-        }
-      },
-    },
-  };
   const server = new ApolloServer({
     typeDefs,
     resolvers,
