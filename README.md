@@ -21,9 +21,21 @@ It will push you to create a fully responsive user-driven application.
 
 #### Step-1: Plan It
 
-Create a component tree mock up or wireframe outlining your project, include all associated
-directories, external node modules, routes, schemas, programs you will need ... etc. Screenshot/videocast/gif or hand these
-in via your PR or assets folder.
+##### Landing Page
+
+<img src="./assets/wire-frames/login-page.png" alt="wire-frame-landing page">
+
+##### List of Issues Page
+
+<img src="./assets/wire-frames/list-of-issues-page.png" alt="list of issues page">
+
+##### Create Issue Page
+
+<img src="./assets/wire-frames/create-issue-page.png" alt="create issue page">
+
+##### List of Issues By User Page
+
+<img src="./assets/wire-frames/list-of-issues-by-user.png" alt="wire-frame-landing page">
 
 #### Step-2: Backend Routes & ORM
 
