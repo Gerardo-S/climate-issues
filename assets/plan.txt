@@ -16,7 +16,6 @@ Models:
 - User
     - username
     - password
-    - email
     - token
     - postedIssues:[climateIssues]
     - voteCountIssue:keep track of what issue was voted for
@@ -25,15 +24,14 @@ Models:
 - Climate issue post sorted by votes
     - Title
     - Description
-    - Vote Counter up/down
     - comments:[comments]
     - author: User
     - voteCount: once by user check id of which user is voting
 
 - Comments
+    - author: User
     - details: text
     - responseToIssue: Issue
-    - author: User
 
 
 

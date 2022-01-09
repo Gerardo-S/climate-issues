@@ -18,41 +18,31 @@ async function startApolloServer() {
   }
   const httpServer = http.createServer(app);
 
-  // graphQl
   const typeDefs = gql`
-    type Product {
-      id: ID
-      item: String
-      description: String
-      price: Int
-    }
-    type User {
-      id: ID
-      name: String
-      password: String
-      cart(id: ID!): [Product]
-      admin: Boolean
+    type ClimateIssue {
+      id: ID!
+      author: String
+      title: String
+      body: String
+      comments: [String]
+      voteCount: Int
     }
 
     type Query {
-      getUsers: [User!]
-      getUser(id: ID!): User
-      getProduct: [Product!]
+      getClimateIssues: [ClimateIssue!]
     }
   `;
 
   const resolvers = {
     Query: {
-      async getUsers() {
-        const users = await db.User.find({});
-        return users;
+      async getClimateIssues() {
+        try {
+          const climateIssues = await db.ClimateIssue.find();
+          return climateIssues;
+        } catch (err) {
+          throw new Error(err);
+        }
       },
-      // getUsers: (parent, args, context, info) => {
-      //   return db.User.find({});
-      // },
-      // getProduct: (parent, args, context, info) => {
-      //   return db.Product.find({});
-      // },
     },
   };
   const server = new ApolloServer({
