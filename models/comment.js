@@ -5,6 +5,7 @@ const commentSchema = new Schema({
   author: { type: Schema.Types.ObjectId, ref: "User" },
   body: { type: String, required: true },
   climateIssue: { type: Schema.Types.ObjectId, ref: "ClimateIssue" },
+  createdAt: String,
 });
 
 const Comment = mongoose.model("Comment", commentSchema);

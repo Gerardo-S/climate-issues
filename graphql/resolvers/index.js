@@ -6,4 +6,7 @@ module.exports = {
   Query: {
     ...climateIssueResolvers.Query,
   },
+  Mutation: {
+    ...usersResolvers.Mutation,
+  },
 };

@@ -17,7 +17,6 @@ async function startApolloServer() {
     app.use(express.static("client/build"));
   }
   const httpServer = http.createServer(app);
-
   const server = new ApolloServer({
     typeDefs,
     resolvers,

@@ -24,6 +24,7 @@ const userSchema = new Schema({
   // TODO
   // if climate issue to vote on is on this list you have already voted on it
   votedClimateIssues: [{ type: Schema.Types.ObjectId, ref: "ClimateIssue" }],
+  createdAt: String,
 });
 
 // Hash password
