@@ -1,0 +1,41 @@
+Button-color: #7F00FF;
+green-color:#00CC00;
+orange-red: #F36A30
+subtext-color: #4D4D4D
+subpage-color: #F5F5F5
+card-border-color: #36393D
+comment-border: #B3B3B3
+
+Criteria:
+Use two context providers, useState or useReducer
+- Users post climate issues only vote once
+- Users must log-in/sign-up to access pages
+- When user logs-in show list of climate issues
+
+Models:
+- User
+    - username
+    - password
+    - token
+    - postedIssues:[climateIssues]
+    - voteCountIssue:keep track of what issue was voted for
+ 
+
+- Climate issue post sorted by votes
+    - Title
+    - Description
+    - comments:[comments]
+    - author: User
+    - voteCount: once by user check id of which user is voting
+
+- Comments
+    - author: User
+    - details: text
+    - responseToIssue: Issue
+
+
+
+Pages:
+- add list of climate issues
+- add climate issue page
+- add list of issues made by user
