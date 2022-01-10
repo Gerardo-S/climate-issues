@@ -9,6 +9,7 @@ module.exports = {
     async getClimateIssues() {
       try {
         const climateIssues = await ClimateIssue.find()
+          // TODO only last populate will work find way to make both function
           .populate("author")
           // Issues will store comment ID's
           .populate({ path: "comments", model: Comment });
