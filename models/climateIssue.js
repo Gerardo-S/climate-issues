@@ -6,7 +6,8 @@ const climateIssueSchema = new Schema({
   title: { type: String, required: true },
   body: { type: String, required: true },
   comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
-  voteCount: Number,
+  // maybe i can keep track of how many objects are in the array ?
+  voteCount: [{ username: String, createdAt: String }],
   createdAt: String,
 });
 
