@@ -41,6 +41,9 @@ module.exports = {
     async createClimateIssue(_, { title, body }, context) {
       // check if user is auth before creating issue
       const user = checkAuth(context);
+      if (body.trim() === "" || title.trim() === "") {
+        throw new Error("Climate Issue body/title were left blank");
+      }
       const newClimateIssue = new ClimateIssue({
         title,
         body,
