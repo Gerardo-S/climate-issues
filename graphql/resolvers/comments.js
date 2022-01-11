@@ -41,6 +41,41 @@ module.exports = {
       }
     },
 
+    async updateComment(_, { climateIssueId, commentId, body }, context) {
+      const user = checkAuth(context);
+      // Take a new body and update issue
+      if (body.trim() === "") {
+        throw new UserInputError("Empty comment", {
+          error: {
+            body: "Comment body must not be empty",
+          },
+        });
+      }
+      const updateComment = new Comment({
+        author: user.username,
+        body,
+        createdAt: new Date().toISOString(),
+      });
+      const comment = await updateComment.save();
+
+      // find climate issue and update comment
+      const climateIssue = await ClimateIssue.findOneAndUpdate(
+        { _id: climateIssueId, comments: commentId },
+        { $set: { "comments.$": comment._id } }
+      )
+        .populate("comments author")
+        .exec();
+      // TODO revisit why returned climateIssue does not return with newly added comment
+      if (climateIssue) {
+        await climateIssue.save();
+        return climateIssue;
+      } else {
+        throw new UserInputError(
+          "Comment unsuccessfully added to Climate Issue "
+        );
+      }
+    },
+
     async deleteComment(_, { climateIssueId, commentId }, context) {
       const { username } = checkAuth(context);
 

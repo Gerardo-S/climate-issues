@@ -59,9 +59,12 @@ module.exports = gql`
     createComment(climateIssueId: String!, body: String): ClimateIssue!
     upVoteClimateIssue(climateIssueId: ID!): ClimateIssue!
     downVoteClimateIssue(climateIssueId: ID!): ClimateIssue!
-    # TODO Update Routes
-    # Update comment
-    updateComment(climateIssueId: String!, body: String): ClimateIssue!
+    # Update comment Route
+    updateComment(
+      climateIssueId: ID!
+      commentId: ID!
+      body: String
+    ): ClimateIssue!
     # Delete Routes
     deleteClimateIssue(climateIssueId: ID!): String!
     deleteComment(climateIssueId: ID!, commentId: ID!): ClimateIssue!
