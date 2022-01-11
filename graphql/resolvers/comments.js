@@ -33,10 +33,8 @@ module.exports = {
       // TODO revisit why returned climateIssue does not return with newly added comment
       if (climateIssue) {
         await climateIssue.save();
-        console.log("updated climateIssue", climateIssue);
         return climateIssue;
       } else {
-        console.log("Comment Id not found", comment.id);
         throw new UserInputError(
           "Comment unsuccessfully added to Climate Issue "
         );

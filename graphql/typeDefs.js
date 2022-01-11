@@ -3,36 +3,39 @@ const { gql } = require("apollo-server-express");
 module.exports = gql`
   type Comment {
     id: ID!
-    # Some climate issues have comments with no authers, otherwise query works
     # keep author as not required then change back when database is clean
-    author: String
+    author: String!
     body: String!
     createdAt: String!
-    # climateIssue: ClimateIssue!
   }
 
-  type voteCount {
+  type DownVote {
     id: ID!
     createdAt: String!
     username: String!
   }
+  type UpVote {
+    id: ID!
+    createdAt: String!
+    username: String!
+  }
+
   type ClimateIssue {
     id: ID!
-    # dont return User as query at creation
+    # TODO author is not returning during creation
     author: User!
     title: String
     body: String
     comments: [Comment]!
-    # TODO I may not need this vote count here
-    voteCount: [voteCount]!
+    downVote: [DownVote]!
+    upVote: [UpVote]!
+    totalVoteCount: Int
     createdAt: String
   }
   type User {
     id: ID!
     username: String!
     token: String!
-    postedClimateIssues: [ClimateIssue!]
-    votedClimateIssues: [ClimateIssue!]
     createdAt: String
   }
 
@@ -42,21 +45,25 @@ module.exports = gql`
   }
 
   type Query {
+    # Read Routes
     getClimateIssues: [ClimateIssue]
-    # getUserPostedClimateIssues():[ClimateIssue]
-    # getClimateIssueByAuthor(author: String!): [ClimateIssue!]
+    getClimateIssueByAuthor: [ClimateIssue!]
   }
 
   type Mutation {
-    createClimateIssue(title: String!, body: String!): ClimateIssue!
-    deleteClimateIssue(climateIssueId: ID!): String!
-
-    # TODO add post for comment inputs are (climateID,body)
-    createComment(climateIssueId: String!, body: String): ClimateIssue!
-    deleteComment(climateIssueId: ID!, commentId: ID!): ClimateIssue!
-    # TODO add post for voter count plus one
-    voteClimateIssue(climateIssueId: ID!): ClimateIssue!
-    register(registerInput: RegisterInput): User!
+    # Authentication
     login(username: String!, password: String!): User!
+    register(registerInput: RegisterInput): User!
+    # Create Routes
+    createClimateIssue(title: String!, body: String!): ClimateIssue!
+    createComment(climateIssueId: String!, body: String): ClimateIssue!
+    upVoteClimateIssue(climateIssueId: ID!): ClimateIssue!
+    downVoteClimateIssue(climateIssueId: ID!): ClimateIssue!
+    # TODO Update Routes
+    # Update comment
+    updateComment(climateIssueId: String!, body: String): ClimateIssue!
+    # Delete Routes
+    deleteClimateIssue(climateIssueId: ID!): String!
+    deleteComment(climateIssueId: ID!, commentId: ID!): ClimateIssue!
   }
 `;

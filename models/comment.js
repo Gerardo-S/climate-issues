@@ -6,9 +6,6 @@ const commentSchema = new Schema({
   // TODO find away to reference author here to User
   // author: { type: Schema.Types.ObjectId, ref: "User" },
   body: { type: String, required: true },
-  // TODO I dont think i need to reference the climateIssue
-  // Added comments will be controlled by individual climateIssues
-  // climateIssue: { type: Schema.Types.ObjectId, ref: "ClimateIssue" },
   createdAt: String,
 });
 

@@ -1,7 +1,9 @@
-const { AuthenticationError } = require("apollo-server-express");
+const {
+  AuthenticationError,
+  UserInputError,
+} = require("apollo-server-express");
 const ClimateIssue = require("../../models/climateIssue");
 const Comment = require("../../models/comment");
-// const User = require("../../models/user");
 
 const checkAuth = require("../../util/check-auth");
 module.exports = {
@@ -9,9 +11,8 @@ module.exports = {
     async getClimateIssues() {
       try {
         const climateIssues = await ClimateIssue.find()
-          // TODO only last populate will work find way to make both function
+          // Populate fields with ID
           .populate("author")
-          // Issues will store comment ID's
           .populate({ path: "comments", model: Comment });
         return climateIssues;
       } catch (err) {
@@ -19,23 +20,23 @@ module.exports = {
       }
     },
 
-    // async getClimateIssueByAuthor(_, { author }) {
-    //   try {
-    //     const climateIssues = await Comment.find({ author: author });
-    //     // .populate(
-    //     //   "author"
-    //     // );
-
-    //     if (climateIssues) {
-    //       return climateIssues;
-    //     } else {
-    //       throw new Error(`No climate issue found for id:${author}`);
-    //     }
-    //   } catch (err) {
-    //     throw new Error(err);
-    //   }
-    // },
+    async getClimateIssueByAuthor(_, arg, context) {
+      const user = checkAuth(context);
+      const climateIssues = await ClimateIssue.find({
+        author: user.id,
+      }).populate("author comments");
+      try {
+        if (climateIssues) {
+          return climateIssues;
+        } else {
+          throw new Error(`No climate issue found for id`);
+        }
+      } catch (err) {
+        throw new Error(err);
+      }
+    },
   },
+  // CREAT And Delete routes
   Mutation: {
     async createClimateIssue(_, { title, body }, context) {
       // check if user is auth before creating issue
@@ -47,15 +48,6 @@ module.exports = {
         createdAt: new Date().toISOString(),
       });
       const climateIssue = await newClimateIssue.save();
-      // const updateUserPosts = await User.findOneAndUpdate(
-      //   { _id: user.id },
-      //   { $push: { postedClimateIssues: climateIssue } }
-      // );
-      // if (!updateUserPosts) {
-      //   errors.general = "User posts unable to update";
-      //   throw new Error("User not found", { errors });
-      // }
-
       return climateIssue;
     },
 
@@ -78,6 +70,55 @@ module.exports = {
       } catch (err) {
         throw new Error(err);
       }
+    },
+
+    async upVoteClimateIssue(_, { climateIssueId }, context) {
+      const { username } = checkAuth(context);
+      const climateIssue = await ClimateIssue.findById(climateIssueId).populate(
+        "author comments"
+      );
+
+      if (climateIssue) {
+        // One vote per user, check if current vote in climate issue matches logged in user
+        if (climateIssue.upVote.find((vote) => vote.username === username)) {
+          throw new UserInputError(
+            "You have already Up Voted on this climate issue"
+          );
+        } else {
+          // You have not up-voted climate issue, up-vote
+          climateIssue.upVote.push({
+            username,
+            createdAt: new Date().toISOString(),
+          });
+        }
+        climateIssue.setTotalVoteCount();
+        await climateIssue.save();
+        return climateIssue;
+      } else throw new UserInputError("Climate Issue not found");
+    },
+
+    async downVoteClimateIssue(_, { climateIssueId }, context) {
+      const { username } = checkAuth(context);
+      const climateIssue = await ClimateIssue.findById(climateIssueId).populate(
+        "author comments"
+      );
+      if (climateIssue) {
+        // One vote per user, check if current vote in climate issue matches logged in user
+        if (climateIssue.downVote.find((vote) => vote.username === username)) {
+          throw new UserInputError(
+            "You have already Down Voted on this climate issue"
+          );
+        } else {
+          // You have not Down Voted climate issue, downVote
+          climateIssue.downVote.push({
+            username,
+            createdAt: new Date().toISOString(),
+          });
+        }
+        climateIssue.setTotalVoteCount();
+        await climateIssue.save();
+        return climateIssue;
+      } else throw new UserInputError("Climate Issue not found");
     },
   },
 };
