@@ -20,7 +20,9 @@ async function startApolloServer() {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
+    context: ({ req }) => ({ req }),
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+
     // playground: process.env.NODE_ENV !== "production",
   });
 

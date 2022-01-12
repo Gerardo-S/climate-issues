@@ -3,25 +3,39 @@ const { gql } = require("apollo-server-express");
 module.exports = gql`
   type Comment {
     id: ID!
-    author: User
-    body: String
-    voteCount: Int
-    createdAt: String
+    # keep author as not required then change back when database is clean
+    author: String!
+    body: String!
+    createdAt: String!
   }
+
+  type DownVote {
+    id: ID!
+    createdAt: String!
+    username: String!
+  }
+  type UpVote {
+    id: ID!
+    createdAt: String!
+    username: String!
+  }
+
   type ClimateIssue {
     id: ID!
-    author: String
+    # TODO author is not returning during creation
+    author: User!
     title: String
     body: String
-    climateIssue: ClimateIssue
+    comments: [Comment]!
+    downVote: [DownVote]!
+    upVote: [UpVote]!
+    totalVoteCount: Int
     createdAt: String
   }
   type User {
     id: ID!
     username: String!
     token: String!
-    postedClimateIssues: [ClimateIssue!]
-    votedClimateIssues: [ClimateIssue!]
     createdAt: String
   }
 
@@ -31,11 +45,28 @@ module.exports = gql`
   }
 
   type Query {
-    getClimateIssues: [ClimateIssue!]
+    # Read Routes
+    getClimateIssues: [ClimateIssue]
+    getClimateIssueByAuthor: [ClimateIssue!]
   }
 
   type Mutation {
-    register(registerInput: RegisterInput): User!
+    # Authentication
     login(username: String!, password: String!): User!
+    register(registerInput: RegisterInput): User!
+    # Create Routes
+    createClimateIssue(title: String!, body: String!): ClimateIssue!
+    createComment(climateIssueId: String!, body: String): ClimateIssue!
+    upVoteClimateIssue(climateIssueId: ID!): ClimateIssue!
+    downVoteClimateIssue(climateIssueId: ID!): ClimateIssue!
+    # Update comment Route
+    updateComment(
+      climateIssueId: ID!
+      commentId: ID!
+      body: String
+    ): ClimateIssue!
+    # Delete Routes
+    deleteClimateIssue(climateIssueId: ID!): String!
+    deleteComment(climateIssueId: ID!, commentId: ID!): ClimateIssue!
   }
 `;

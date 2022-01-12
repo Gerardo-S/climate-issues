@@ -15,15 +15,6 @@ const userSchema = new Schema({
       message: "Password should be at least 6 characters.",
     },
   },
-  postedClimateIssues: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "ClimateIssue",
-    },
-  ],
-  // TODO
-  // if climate issue to vote on is on this list you have already voted on it
-  votedClimateIssues: [{ type: Schema.Types.ObjectId, ref: "ClimateIssue" }],
   createdAt: String,
 });
 
