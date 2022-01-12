@@ -1,11 +1,10 @@
 import React from "react";
 
-import "./home-style.css";
-function Home() {
+function Issues() {
   return (
     <div className="homeContainer">
-      <h1>Hello World</h1>
+      <h1>List of All Issues Page</h1>
     </div>
   );
 }
-export default Home;
+export default Issues;

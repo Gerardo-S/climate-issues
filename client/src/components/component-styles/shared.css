@@ -9,17 +9,13 @@
 }
 .cardForm {
   background-color: white;
-  border-radius: 5px;
-  padding: 5px;
-  margin: 25px;
-  /* max-width: 600px; */
-}
-
-input,
-label,
-select,
-textarea {
-  margin: 8px 0 8px 4px;
+  border-radius: 20px;
+  padding: 40px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 400px;
 }
 
 .contentContainer {
@@ -93,19 +89,24 @@ hr {
 }
 
 .buttonContainer {
-  display: flex;
-  justify-content: flex-end;
+  /* display: flex; */
+  margin-right: 2em;
+  /* justify-content: flex-end; */
 }
 
 textarea {
   max-width: 8em;
 }
-
+label {
+  font-size: x-large;
+}
 input,
 textarea,
 select,
 button {
-  font-size: larger;
+  font-size: x-large;
+  width: 300px;
+  padding: 4px;
 }
 
 table {
@@ -141,4 +142,34 @@ input:required:valid {
   border-color: 1px;
   border-color: green;
   background-color: rgba(40, 247, 40, 0.1);
+}
+
+.navContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+#logoContainer {
+  display: flex;
+  margin-right: 2em;
+}
+
+#logo {
+  margin-right: 1em;
+}
+
+.navItemsList {
+  display: flex;
+}
+
+.navItemsList,
+h3 {
+  margin-right: 2em;
+  text-decoration: none;
+}
+
+a:link {
+  text-decoration: none;
 }
