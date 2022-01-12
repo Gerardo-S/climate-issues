@@ -2,6 +2,7 @@ const { ApolloServer } = require("apollo-server-express");
 const { ApolloServerPluginDrainHttpServer } = require("apollo-server-core");
 const express = require("express");
 const http = require("http");
+const cors = require("cors");
 const mongoose = require("mongoose");
 const typeDefs = require("./graphql/typeDefs");
 const resolvers = require("./graphql/resolvers");
@@ -12,7 +13,12 @@ async function startApolloServer() {
   // middleware
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
-
+  app.use(
+    cors({
+      origin: true,
+      credentials: true,
+    })
+  );
   if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
   }
@@ -23,7 +29,7 @@ async function startApolloServer() {
     context: ({ req }) => ({ req }),
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 
-    // playground: process.env.NODE_ENV !== "production",
+    playground: process.env.NODE_ENV !== "production",
   });
 
   mongoose.connect(
