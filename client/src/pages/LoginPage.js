@@ -45,6 +45,11 @@ function LogInPage() {
       <Form
         label1={"Username:"}
         label2={"Password:"}
+        type={"text"}
+        name1={"username"}
+        name2={"password"}
+        placeHolder1={"username"}
+        placeHolder2={"********"}
         inputValue={returningUser}
         buttonText={loading ? "...Loading" : "Login"}
         handleInputChange={handleInputChange}

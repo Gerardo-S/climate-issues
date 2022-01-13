@@ -6,6 +6,7 @@
   margin: auto;
   width: 50%;
   min-width: 820px;
+  margin-bottom: 2em;
 }
 .cardForm {
   background-color: white;
@@ -53,6 +54,9 @@
   margin-left: 1em;
 }
 
+.viewComments {
+  margin-left: 1em;
+}
 .voteContainer {
   display: flex;
   flex-direction: column;

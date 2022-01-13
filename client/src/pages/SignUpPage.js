@@ -44,6 +44,11 @@ function SignUpPage() {
       <Form
         label1={"Username:"}
         label2={"Password:"}
+        type={"text"}
+        name1={"username"}
+        name2={"password"}
+        placeHolder1={"username"}
+        placeHolder2={"********"}
         inputValue={newUser}
         error={Object.keys(errors).length > 0 ? errors : false}
         buttonText={loading ? "...Loading" : "Register"}

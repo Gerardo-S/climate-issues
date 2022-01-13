@@ -8,17 +8,24 @@ function Form({
   label2,
   inputValue,
   buttonText,
+  textArea,
+  type,
   handleInputChange,
   handleSubmitForm,
   error,
+  placeHolder1,
+  placeHolder2,
+  name1,
+  name2,
 }) {
   return (
     <Card form={true}>
       <Input
         label={label1}
+        type={type}
         inputValue={inputValue.username}
-        name={"username"}
-        placeHolder={"username"}
+        name={name1}
+        placeHolder={placeHolder1}
         error={error ? error.username.message : false}
         handleInputChange={handleInputChange}
       />
@@ -26,12 +33,12 @@ function Form({
       <Input
         label={label2}
         inputValue={inputValue.password}
-        name={"password"}
-        placeHolder={"******"}
-        textArea={false}
-        type={"password"}
+        name={name2}
+        placeHolder={placeHolder2}
+        type={type}
         error={error ? error.password.message : false}
         handleInputChange={handleInputChange}
+        textArea={textArea}
       />
       <br />
 

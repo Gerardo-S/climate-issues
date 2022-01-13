@@ -1,28 +1,72 @@
 import React, { useState } from "react";
+import { useQuery } from "@apollo/client";
 import ClimateIssue from "../components/ClimateIssue";
-function Issues() {
+import gql from "graphql-tag";
+
+function IssuesPage() {
+  const { loading, data } = useQuery(FETCH_CLIMATE_ISSUES_QUERY);
   const [toggleComments, setToggleComments] = useState(false);
 
+  if (data) {
+    console.log(data);
+  }
+
+  // TODO if time permits get element by id and switch class to hidden
   const handleToggleComments = (evt) => {
     evt.preventDefault();
-    toggleComments ? setToggleComments(false) : setToggleComments(true);
+    const target = evt.target.id;
+    // const commentDiv = document.getElementById();
+    // toggleComments ? setToggleComments(false) : setToggleComments(true);
   };
 
   return (
     <div className="issuesPageContainer">
       <h1>Trending Post</h1>
-      <ClimateIssue
-        // voteCount,
-        // username,
-        // postTitle,
-        // postDescription,
-        // commentsData,
-        handleToggleComments={handleToggleComments}
-        toggleComments={toggleComments}
-      />
+      {data &&
+        data.getClimateIssues.map((issueData) => {
+          return (
+            <ClimateIssue
+              key={issueData.id}
+              issueData={issueData}
+              handleToggleComments={handleToggleComments}
+              toggleComments={toggleComments}
+            />
+          );
+        })}
 
       <br />
     </div>
   );
 }
-export default Issues;
+
+const FETCH_CLIMATE_ISSUES_QUERY = gql`
+  {
+    getClimateIssues {
+      id
+      author {
+        id
+        username
+      }
+      title
+      body
+      upVote {
+        id
+        username
+      }
+
+      downVote {
+        id
+        username
+      }
+      totalVoteCount
+
+      comments {
+        author
+        id
+        body
+        createdAt
+      }
+    }
+  }
+`;
+export default IssuesPage;
