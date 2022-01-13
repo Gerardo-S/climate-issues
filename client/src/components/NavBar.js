@@ -38,17 +38,6 @@ function NavBar() {
           <h2>{user ? `Welcome Back ${user.username}` : "Home"}</h2>
         </div>
       </Link>
-      {/* <div className="navItemsList">
-        <Link to="all-issues-page">
-          <h3>Climate-Issues</h3>
-        </Link>
-        <Link to="create-issue-post">
-          <h3>Post-Issue</h3>
-        </Link>
-        <Link to="my-issue-post">
-          <h3>See-Your-Post</h3>
-        </Link>
-      </div> */}
       {navItemList}
     </nav>
   );

@@ -10,6 +10,7 @@ function Form({
   buttonText,
   textArea,
   type,
+  type2,
   handleInputChange,
   handleSubmitForm,
   error,
@@ -32,6 +33,7 @@ function Form({
       <br />
       <Input
         label={label2}
+        type2={type2}
         inputValue={inputValue.password}
         name={name2}
         placeHolder={placeHolder2}

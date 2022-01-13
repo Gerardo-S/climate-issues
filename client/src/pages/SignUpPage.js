@@ -45,6 +45,7 @@ function SignUpPage() {
         label1={"Username:"}
         label2={"Password:"}
         type={"text"}
+        type2={"password"}
         name1={"username"}
         name2={"password"}
         placeHolder1={"username"}

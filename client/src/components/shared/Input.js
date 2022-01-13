@@ -7,6 +7,7 @@ function Input({
   placeHolder,
   textArea,
   type,
+  type2,
   labelBoolean,
   handleInputChange,
   error,
@@ -36,7 +37,7 @@ function Input({
           <input
             value={inputValue}
             required
-            type={type ? type : "text"}
+            type={type2}
             id={placeHolder}
             name={name}
             onChange={handleInputChange}

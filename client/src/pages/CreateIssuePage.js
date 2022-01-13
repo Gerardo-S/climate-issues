@@ -28,6 +28,7 @@ function CreateIssuePage() {
     evt.preventDefault();
     createIssue();
   };
+  // TODO handle errors/loading
   return (
     <div className="homeContainer">
       <h1>Add Climate Issue</h1>
