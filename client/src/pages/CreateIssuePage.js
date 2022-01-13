@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
 import Form from "../components/Form";
+import { useNavigate } from "react-router-dom";
+import { FETCH_CLIMATE_ISSUES_QUERY } from "../util/graphql";
 
 function CreateIssuePage() {
+  let navigate = useNavigate();
   const [issue, setIssue] = useState({
     title: "",
     body: "",
@@ -13,21 +16,17 @@ function CreateIssuePage() {
     const value = evt.target.value;
     setIssue({ ...issue, [name]: value });
   };
-  const [createIssue, { loading }] = useMutation(CREATE_ISSUE, {
-    // Destructure result.data.login and give alias "userData"
-    // update(_, { data: { login: userData } }) {
-    //   context.login(userData);
-    //   navigate("/all-issues-page");
-    // },
-    // onError(err) {
-    //   setErrors(err.graphQLErrors[0].extensions.errors);
-    // },
-    // variables: returningUser,
+  const [createIssue, { error }] = useMutation(CREATE_ISSUE, {
+    variables: issue,
+    refetchQueries: [FETCH_CLIMATE_ISSUES_QUERY, "getClimateIssues"],
+    update(proxy, result) {
+      navigate("/all-issues-page");
+    },
   });
 
   const handleSubmitForm = (evt) => {
     evt.preventDefault();
-    // loginUser();
+    createIssue();
   };
   return (
     <div className="homeContainer">
@@ -42,7 +41,7 @@ function CreateIssuePage() {
         label2={"Description:"}
         textArea={true}
         inputValue={issue}
-        buttonText={loading ? "...Loading" : "Create"}
+        buttonText={"Create"}
         handleInputChange={handleInputChange}
         handleSubmitForm={handleSubmitForm}
       />
@@ -51,12 +50,25 @@ function CreateIssuePage() {
 }
 
 const CREATE_ISSUE = gql`
-  mutation createIssue($username: String!, $password: String!) {
-    login(username: $username, password: $password) {
+  mutation createClimateIssue($title: String!, $body: String!) {
+    createClimateIssue(title: $title, body: $body) {
       id
-      username
-      createdAt
-      token
+      title
+      body
+      upVote {
+        id
+        username
+      }
+      downVote {
+        id
+        username
+      }
+      totalVoteCount
+      comments {
+        author
+        id
+        body
+      }
     }
   }
 `;

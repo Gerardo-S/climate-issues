@@ -1,22 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import ClimateIssue from "../components/ClimateIssue";
-import gql from "graphql-tag";
-
+import { FETCH_CLIMATE_ISSUES_QUERY } from "../util/graphql";
 function IssuesPage() {
   const { loading, data } = useQuery(FETCH_CLIMATE_ISSUES_QUERY);
   const [toggleComments, setToggleComments] = useState(false);
-
-  if (data) {
-    console.log(data);
-  }
 
   // TODO if time permits get element by id and switch class to hidden
   const handleToggleComments = (evt) => {
     evt.preventDefault();
     const target = evt.target.id;
-    // const commentDiv = document.getElementById();
-    // toggleComments ? setToggleComments(false) : setToggleComments(true);
   };
 
   return (
@@ -39,34 +32,4 @@ function IssuesPage() {
   );
 }
 
-const FETCH_CLIMATE_ISSUES_QUERY = gql`
-  {
-    getClimateIssues {
-      id
-      author {
-        id
-        username
-      }
-      title
-      body
-      upVote {
-        id
-        username
-      }
-
-      downVote {
-        id
-        username
-      }
-      totalVoteCount
-
-      comments {
-        author
-        id
-        body
-        createdAt
-      }
-    }
-  }
-`;
 export default IssuesPage;
