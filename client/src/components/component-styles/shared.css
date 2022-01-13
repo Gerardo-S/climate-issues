@@ -1,27 +1,31 @@
 .card {
   background-color: white;
-  /* min-width: 400px; */
-  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  padding: 5px;
-  margin: 25px;
-  min-width: 400px;
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid black;
+  margin: auto;
+  width: 50%;
+  min-width: 820px;
+  margin-bottom: 2em;
 }
 .cardForm {
   background-color: white;
-  border-radius: 5px;
-  padding: 5px;
-  margin: 25px;
-  /* max-width: 600px; */
+  border-radius: 20px;
+  padding: 40px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 400px;
 }
-
-input,
-label,
-select,
-textarea {
-  margin: 8px 0 8px 4px;
+.commentCard {
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid black;
+  margin: auto;
+  max-width: 750px;
 }
-
 .contentContainer {
   background-color: #a5c9ff;
   border-radius: 5px;
@@ -29,9 +33,38 @@ textarea {
   padding: 5px;
   box-shadow: -3px 5px 5px rgba(0, 0, 0, 0.2);
 }
+.commentsContainer {
+  margin: auto;
+}
+.climateIssueContainer {
+  display: flex;
+}
 
+.climateIssueText {
+  margin-left: 1em;
+  padding-left: 15px;
+  border-left: solid 1px black;
+}
+.commentsTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#downVoteArrow {
+  margin-left: 1em;
+}
+
+.viewComments {
+  margin-left: 1em;
+}
+.voteContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 h1,
-h2 {
+h2,
+h5 {
   text-align: center;
 }
 
@@ -42,12 +75,32 @@ hr {
 }
 
 .submitButton {
-  padding: 2px 8px 2px 8px;
+  padding: 8px;
   color: white;
   border-radius: 5px;
   border-width: 1px;
   background-color: dodgerblue;
   transition-duration: 0.4s;
+}
+
+.logInButton {
+  width: 200px;
+  height: 70px;
+  padding: 8px;
+  color: white;
+  border-radius: 5px;
+  border-width: 1px;
+  background-color: dodgerblue;
+  transition-duration: 0.4s;
+}
+
+.logInButton:focus {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: rgb(24, 78, 226);
+}
+.logInButton:hover {
+  background-color: rgb(24, 78, 226);
 }
 
 .removeButton {
@@ -93,19 +146,26 @@ hr {
 }
 
 .buttonContainer {
-  display: flex;
-  justify-content: flex-end;
+  margin-right: 2em;
 }
 
+.submitButtonContainer {
+  display: flex;
+  margin-right: 2em;
+  justify-content: flex-end;
+}
 textarea {
   max-width: 8em;
 }
-
+label {
+  font-size: x-large;
+}
 input,
 textarea,
 select,
 button {
-  font-size: larger;
+  font-size: x-large;
+  padding: 4px;
 }
 
 table {
@@ -141,4 +201,40 @@ input:required:valid {
   border-color: 1px;
   border-color: green;
   background-color: rgba(40, 247, 40, 0.1);
+}
+
+.navContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+#logoContainer {
+  display: flex;
+  margin-right: 2em;
+}
+
+#logo {
+  margin-right: 1em;
+}
+
+.navItemsList {
+  display: flex;
+  align-items: center;
+}
+
+.navItemsList,
+h3 {
+  margin-right: 2em;
+  text-decoration: none;
+  text-align: center;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+#errors {
+  color: red;
 }

@@ -1,5 +1,4 @@
-.homeContainer {
-  min-width: 1170px;
+.homeButtonContainer {
   display: flex;
   justify-content: center;
 }
