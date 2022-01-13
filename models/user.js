@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const SALT_ROUNDS = 10;
 
 const userSchema = new Schema({
-  username: { type: String, required: true },
+  username: { type: String, required: "Username is Required" },
   password: {
     type: String,
     trim: true,

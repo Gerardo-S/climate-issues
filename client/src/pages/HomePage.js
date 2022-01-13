@@ -13,7 +13,7 @@ function HomePage() {
           <Button buttonText={"Log-In"} buttonType={"logInButton"} />
         </Link>
         <Link to="/register-page">
-          <Button buttonText={"Sign-Ip"} buttonType={"logInButton"} />
+          <Button buttonText={"Sign-Up"} buttonType={"logInButton"} />
         </Link>
       </div>
     </div>

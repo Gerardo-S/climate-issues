@@ -38,12 +38,32 @@ hr {
 }
 
 .submitButton {
-  padding: 2px 8px 2px 8px;
+  padding: 8px;
   color: white;
   border-radius: 5px;
   border-width: 1px;
   background-color: dodgerblue;
   transition-duration: 0.4s;
+}
+
+.logInButton {
+  width: 200px;
+  height: 70px;
+  padding: 8px;
+  color: white;
+  border-radius: 5px;
+  border-width: 1px;
+  background-color: dodgerblue;
+  transition-duration: 0.4s;
+}
+
+.logInButton:focus {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: rgb(24, 78, 226);
+}
+.logInButton:hover {
+  background-color: rgb(24, 78, 226);
 }
 
 .removeButton {
@@ -89,11 +109,14 @@ hr {
 }
 
 .buttonContainer {
-  /* display: flex; */
   margin-right: 2em;
-  /* justify-content: flex-end; */
 }
 
+.submitButtonContainer {
+  display: flex;
+  margin-right: 2em;
+  justify-content: flex-end;
+}
 textarea {
   max-width: 8em;
 }
@@ -105,7 +128,7 @@ textarea,
 select,
 button {
   font-size: x-large;
-  width: 300px;
+  /* width: 300px; */
   padding: 4px;
 }
 
@@ -172,4 +195,8 @@ h3 {
 
 a:link {
   text-decoration: none;
+}
+
+#errors {
+  color: red;
 }

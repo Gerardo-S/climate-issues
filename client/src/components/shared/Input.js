@@ -9,6 +9,7 @@ function Input({
   type,
   labelBoolean,
   handleInputChange,
+  error,
 }) {
   return (
     <>
@@ -41,6 +42,8 @@ function Input({
             onChange={handleInputChange}
             placeholder={placeHolder}
           />
+
+          {error ? <p id="errors">*{error}</p> : ""}
         </>
       )}
     </>
