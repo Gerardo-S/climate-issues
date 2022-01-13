@@ -9,7 +9,7 @@ function Issues() {
   };
 
   return (
-    <div className="homeContainer">
+    <div className="issuesPageContainer">
       <h1>Trending Post</h1>
       <ClimateIssue
         // voteCount,
@@ -20,6 +20,7 @@ function Issues() {
         handleToggleComments={handleToggleComments}
         toggleComments={toggleComments}
       />
+
       <br />
     </div>
   );

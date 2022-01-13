@@ -3,8 +3,9 @@
   border-radius: 20px;
   padding: 20px;
   border: 1px solid black;
-  margin: 25px;
-  min-width: 400px;
+  margin: auto;
+  width: 50%;
+  min-width: 820px;
 }
 .cardForm {
   background-color: white;
@@ -16,7 +17,14 @@
   justify-content: center;
   width: 400px;
 }
-
+.commentCard {
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid black;
+  margin: auto;
+  max-width: 750px;
+}
 .contentContainer {
   background-color: #a5c9ff;
   border-radius: 5px;
@@ -24,7 +32,9 @@
   padding: 5px;
   box-shadow: -3px 5px 5px rgba(0, 0, 0, 0.2);
 }
-
+.commentsContainer {
+  margin: auto;
+}
 .climateIssueContainer {
   display: flex;
 }
@@ -151,7 +161,6 @@ textarea,
 select,
 button {
   font-size: x-large;
-  /* width: 300px; */
   padding: 4px;
 }
 
@@ -208,6 +217,7 @@ input:required:valid {
 
 .navItemsList {
   display: flex;
+  align-items: center;
 }
 
 .navItemsList,

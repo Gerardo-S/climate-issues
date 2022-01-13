@@ -30,7 +30,7 @@ function ClimateIssue({
           </p>
         </div>
       </section>
-      <div>
+      <div className="commentsContainer">
         <div className="commentsTitle">
           <h5>View Comments</h5>
           <div id="downVoteArrow" onClick={handleToggleComments}>
