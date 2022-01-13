@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Form from "../components/Form";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
-function LogInPage(props) {
+import { AuthContext } from "../context/auth";
+
+function LogInPage() {
   let navigate = useNavigate();
+
+  const context = useContext(AuthContext);
   const [errors, setErrors] = useState({});
+
   const [returningUser, setReturningUser] = useState({
     username: "",
     password: "",
@@ -18,7 +23,9 @@ function LogInPage(props) {
   };
 
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
-    update(_, result) {
+    // Destructure result.data.login and give alias "userData"
+    update(_, { data: { login: userData } }) {
+      context.login(userData);
       navigate("/all-issues-page");
     },
     onError(err) {

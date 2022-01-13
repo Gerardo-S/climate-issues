@@ -1,7 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./component-styles/shared.css";
-function NavBar({ title }) {
+import { AuthContext } from "../context/auth";
+import Button from "./shared/Button";
+function NavBar() {
+  const { user, logout } = useContext(AuthContext);
+
+  const navItemList = user ? (
+    <div className="navItemsList">
+      <Link to="all-issues-page">
+        <h3>Climate-Issues</h3>
+      </Link>
+      <Link to="create-issue-post">
+        <h3>Post-Issue</h3>
+      </Link>
+      <Link to="my-issue-post">
+        <h3>See-Your-Post</h3>
+      </Link>
+      <Link to="/">
+        <Button
+          buttonText={"Logout"}
+          buttonType={"submitButton"}
+          handleSubmit={logout}
+        />
+      </Link>
+    </div>
+  ) : (
+    <div className="navItemsList">{null}</div>
+  );
   return (
     <nav className="navContainer">
       <Link to="/">
@@ -9,10 +35,10 @@ function NavBar({ title }) {
           <span id="logo">
             <h2>Logo</h2>
           </span>
-          <h2>Home</h2>
+          <h2>{user ? `Welcome Back ${user.username}` : "Home"}</h2>
         </div>
       </Link>
-      <div className="navItemsList">
+      {/* <div className="navItemsList">
         <Link to="all-issues-page">
           <h3>Climate-Issues</h3>
         </Link>
@@ -22,7 +48,8 @@ function NavBar({ title }) {
         <Link to="my-issue-post">
           <h3>See-Your-Post</h3>
         </Link>
-      </div>
+      </div> */}
+      {navItemList}
     </nav>
   );
 }

@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Form from "../components/Form";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
-function SignUpPage(props) {
+import { AuthContext } from "../context/auth";
+
+function SignUpPage() {
   let navigate = useNavigate();
+  const context = useContext(AuthContext);
   const [errors, setErrors] = useState({});
   const [newUser, setNewUser] = useState({
     username: "",
@@ -18,7 +21,9 @@ function SignUpPage(props) {
   };
 
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
-    update(_, result) {
+    // Pass user Data to context login
+    update(_, { data: { register: userData } }) {
+      context.login(userData);
       navigate("/all-issues-page");
     },
     onError(err) {
